@@ -167,8 +167,8 @@ const Contact = () => {
                   <div>
                     <h4 className="text-lg font-semibold text-gray-900 mb-1">GitHub</h4>
                     <p className="text-gray-600">
-                      <a href="https://github.com/i-s0nic" className="text-gray-700 hover:text-gray-900 transition-colors font-medium hover:underline" target="_blank" rel="noopener noreferrer">
-                        github.com/i-s0nic
+                      <a href="https://github.com/Saurabh-Upadhayay" className="text-gray-700 hover:text-gray-900 transition-colors font-medium hover:underline" target="_blank" rel="noopener noreferrer">
+                        github.com/Saurabh-Upadhayay
                       </a>
                     </p>
                   </div>
