@@ -115,7 +115,7 @@ const Hero = () => {
                 >
                   <div className="space-y-4 mb-6">
                     {[
-                      { icon: "🚀", text: "MTS @ LambdaTest" },
+                      { icon: "🚀", text: "SDE @ Microsoft" },
                       { icon: "⚙️", text: "Backend Engineering" },
                       { icon: "⚡", text: "Performance Tuning" },
                       { icon: "🧠", text: "System Design" }
