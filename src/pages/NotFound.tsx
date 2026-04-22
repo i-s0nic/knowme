@@ -23,7 +23,7 @@ const NotFound = () => {
             The page at <span className="font-mono bg-gray-100 px-2 py-1 rounded">{location.pathname}</span> was not found.
           </p>
           <Link 
-            to="/knowme" 
+            to="/" 
             className="px-6 py-3 bg-indigo-600 text-white font-medium rounded-md hover:bg-indigo-700 transition-colors inline-block"
           >
             Return to Home

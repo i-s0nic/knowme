@@ -1,12 +1,13 @@
+
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
 
+// https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => ({
-  base: "/knowme/", // 👈 Required for GitHub Pages
   server: {
-    host: "0.0.0.0",
+    host: "::",
     port: 8080,
   },
   plugins: [
@@ -18,6 +19,7 @@ export default defineConfig(({ command, mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  base: "./",
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
@@ -35,9 +37,10 @@ export default defineConfig(({ command, mode }) => ({
     },
   },
   optimizeDeps: {
-    include: ['react', 'react-dom', 'framer-motion', 'lucide-react', 'react-router-dom'],
+    include: ['react', 'react-dom', 'framer-motion', 'lucide-react', 'react-router-dom']
   },
   esbuild: {
     target: 'esnext',
-  },
+    format: 'esm'
+  }
 }));

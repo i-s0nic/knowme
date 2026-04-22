@@ -1,8 +1,15 @@
-
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Code2 } from "lucide-react";
+
+const navItems = [
+  { id: "about", label: "About" },
+  { id: "experience", label: "Experience" },
+  { id: "skills", label: "Skills" },
+  { id: "achievements", label: "Achievements" },
+  { id: "contact", label: "Contact" },
+];
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -11,202 +18,128 @@ const Header = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-
-  useEffect(() => {
-    setIsMenuOpen(false);
-  }, [location.pathname]);
+  useEffect(() => setIsMenuOpen(false), [location.pathname]);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
-      
-      const sections = ['home', 'about', 'experience', 'skills', 'education', 'contact'];
-      const scrollPosition = window.scrollY + 120;
-      
+      setScrolled(window.scrollY > 20);
+      const sections = ["home", ...navItems.map((n) => n.id)];
+      const pos = window.scrollY + 120;
       for (let i = sections.length - 1; i >= 0; i--) {
-        const element = document.getElementById(sections[i]);
-        if (element && element.offsetTop <= scrollPosition) {
+        const el = document.getElementById(sections[i]);
+        if (el && el.offsetTop <= pos) {
           setActiveSection(sections[i]);
           break;
         }
       }
     };
-    
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToSection = (sectionId: string) => {
+  const scrollTo = (id: string) => {
     setIsMenuOpen(false);
-    
-    if (location.pathname !== '/') {
-      navigate('/');
-      setTimeout(() => {
-        scrollToElement(sectionId);
-      }, 100);
-    } else {
-      scrollToElement(sectionId);
-    }
+    const go = () => {
+      const el = document.getElementById(id);
+      if (el) window.scrollTo({ top: el.offsetTop - 80, behavior: "smooth" });
+    };
+    if (location.pathname !== "/") {
+      navigate("/");
+      setTimeout(go, 120);
+    } else go();
   };
-
-  const scrollToElement = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      const headerHeight = 100; // Increased header offset
-      const elementPosition = element.offsetTop;
-      const offsetPosition = elementPosition - headerHeight;
-      
-      window.scrollTo({
-        top: Math.max(0, offsetPosition),
-        behavior: 'smooth'
-      });
-    }
-  };
-
-  const handleProjectsClick = () => {
-    setIsMenuOpen(false);
-    navigate('/projects');
-    setTimeout(() => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    }, 100);
-  };
-
-  const navItems = [
-    { id: "home", label: "Home", type: "scroll" },
-    { id: "about", label: "About", type: "scroll" },
-    { id: "experience", label: "Experience", type: "scroll" },
-    { path: "/projects", label: "Projects", type: "route", onClick: handleProjectsClick },
-    { id: "contact", label: "Contact", type: "scroll" }
-  ];
 
   return (
-    <motion.header 
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3 }}
-      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 ${
-        scrolled 
-          ? 'bg-white/98 backdrop-blur-xl shadow-xl border-b border-gray-200/80' 
-          : 'bg-white/95 backdrop-blur-lg shadow-lg'
+    <motion.header
+      initial={{ y: -40, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className={`fixed top-0 inset-x-0 z-[100] transition-all duration-300 ${
+        scrolled
+          ? "glass-strong shadow-card border-b border-border"
+          : "bg-transparent border-b border-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
-          <Link to="/" className="flex items-center space-x-3 group z-10">
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="relative w-12 h-12 bg-gradient-to-br from-purple-600 to-blue-600 rounded-xl flex items-center justify-center shadow-lg"
-            >
-              <Code2 className="w-6 h-6 text-white" />
-            </motion.div>
-            <div className="hidden sm:block">
-              <span className="text-xl font-bold text-gray-900">
-                Saurabh Upadhayay
-              </span>
-              <p className="text-sm text-gray-600 font-medium">Software Engineer</p>
+        <div className="flex items-center justify-between h-16">
+          <button onClick={() => scrollTo("home")} className="flex items-center gap-3 group">
+            <div className="relative w-10 h-10 rounded-xl bg-gradient-primary flex items-center justify-center shadow-glow">
+              <Code2 className="w-5 h-5 text-primary-foreground" />
             </div>
-          </Link>
-          
-          <nav className="hidden lg:flex items-center space-x-2">
+            <div className="hidden sm:block text-left">
+              <p className="text-sm font-bold text-foreground leading-none">Saurabh Upadhayay</p>
+              <p className="text-xs text-muted-foreground mt-1">SDE-2 @ Microsoft</p>
+            </div>
+          </button>
+
+          <nav className="hidden lg:flex items-center gap-1">
             {navItems.map((item) => (
-              <div key={item.label}>
-                {item.type === "route" ? (
-                  <button
-                    onClick={item.onClick}
-                    className={`relative font-semibold transition-all duration-300 px-5 py-2.5 rounded-xl text-sm ${
-                      location.pathname === item.path 
-                        ? "text-white bg-gradient-to-r from-purple-600 to-blue-600 shadow-lg transform scale-105" 
-                        : "text-gray-700 hover:text-purple-700 hover:bg-purple-50/80 hover:scale-105"
-                    }`}
-                  >
-                    {item.label}
-                  </button>
-                ) : (
-                  <button
-                    onClick={() => scrollToSection(item.id!)}
-                    className={`relative font-semibold transition-all duration-300 px-5 py-2.5 rounded-xl text-sm ${
-                      activeSection === item.id && location.pathname === '/'
-                        ? "text-purple-700 bg-purple-100/80 shadow-md transform scale-105"
-                        : "text-gray-700 hover:text-purple-700 hover:bg-purple-50/80 hover:scale-105"
-                    }`}
-                  >
-                    {item.label}
-                    {activeSection === item.id && location.pathname === '/' && (
-                      <motion.div
-                        layoutId="activeSection"
-                        className="absolute bottom-0 left-1/2 w-2 h-2 bg-purple-600 rounded-full transform -translate-x-1/2 translate-y-1"
-                        transition={{ duration: 0.3 }}
-                      />
-                    )}
-                  </button>
+              <button
+                key={item.id}
+                onClick={() => scrollTo(item.id)}
+                className={`relative px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  activeSection === item.id
+                    ? "text-primary"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {item.label}
+                {activeSection === item.id && (
+                  <motion.span
+                    layoutId="nav-active"
+                    className="absolute inset-0 -z-10 rounded-lg bg-primary/10 border border-primary/20"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
                 )}
-              </div>
+              </button>
             ))}
-          </nav>
-          
-          <div className="lg:hidden">
-            <motion.button 
-              whileTap={{ scale: 0.9 }}
-              className="p-3 rounded-xl bg-white/95 border-2 border-gray-200 hover:bg-purple-50 hover:border-purple-300 transition-all duration-300 shadow-lg"
-              onClick={toggleMenu}
-              aria-label="Toggle menu"
+            <Link
+              to="/projects"
+              className="ml-2 px-4 py-2 rounded-lg text-sm font-semibold bg-gradient-primary text-primary-foreground shadow-glow hover:opacity-90 transition"
             >
-              <AnimatePresence mode="wait">
-                {isMenuOpen ? (
-                  <X className="h-6 w-6 text-gray-700" />
-                ) : (
-                  <Menu className="h-6 w-6 text-gray-700" />
-                )}
-              </AnimatePresence>
-            </motion.button>
-          </div>
+              Projects
+            </Link>
+          </nav>
+
+          <button
+            className="lg:hidden p-2 rounded-lg glass border border-border"
+            onClick={() => setIsMenuOpen((v) => !v)}
+            aria-label="Toggle menu"
+          >
+            {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
         </div>
       </div>
-      
+
       <AnimatePresence>
         {isMenuOpen && (
-          <motion.div 
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-            className="lg:hidden overflow-hidden bg-white/98 backdrop-blur-xl border-t border-gray-200/80 shadow-xl z-[110]"
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="lg:hidden glass-strong border-t border-border overflow-hidden"
           >
-            <div className="max-w-7xl mx-auto px-4 py-6 space-y-3">
+            <div className="px-4 py-4 space-y-1">
               {navItems.map((item) => (
-                <div key={item.label}>
-                  {item.type === "route" ? (
-                    <button
-                      onClick={item.onClick}
-                      className={`block py-4 px-6 rounded-xl font-semibold transition-all duration-300 w-full text-left ${
-                        location.pathname === item.path 
-                          ? "text-white bg-gradient-to-r from-purple-600 to-blue-600 shadow-lg" 
-                          : "text-gray-700 hover:text-purple-700 hover:bg-purple-50 border border-gray-200 hover:border-purple-300"
-                      }`}
-                    >
-                      {item.label}
-                    </button>
-                  ) : (
-                    <button
-                      onClick={() => scrollToSection(item.id!)}
-                      className={`block py-4 px-6 rounded-xl font-semibold transition-all duration-300 w-full text-left ${
-                        activeSection === item.id && location.pathname === '/'
-                          ? "text-purple-700 bg-purple-100 shadow-md border border-purple-300"
-                          : "text-gray-700 hover:text-purple-700 hover:bg-purple-50 border border-gray-200 hover:border-purple-300"
-                      }`}
-                    >
-                      {item.label}
-                    </button>
-                  )}
-                </div>
+                <button
+                  key={item.id}
+                  onClick={() => scrollTo(item.id)}
+                  className={`block w-full text-left px-4 py-3 rounded-lg text-sm font-medium ${
+                    activeSection === item.id
+                      ? "bg-primary/10 text-primary border border-primary/20"
+                      : "text-muted-foreground hover:bg-secondary hover:text-foreground"
+                  }`}
+                >
+                  {item.label}
+                </button>
               ))}
+              <Link
+                to="/projects"
+                className="block px-4 py-3 rounded-lg text-sm font-semibold bg-gradient-primary text-primary-foreground text-center"
+              >
+                Projects
+              </Link>
             </div>
           </motion.div>
         )}

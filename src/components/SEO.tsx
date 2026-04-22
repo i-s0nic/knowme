@@ -9,8 +9,8 @@ interface SEOProps {
 }
 
 const SEO = ({ 
-  title = "Saurabh Upadhayay | Software Engineer",
-  description = "Professional portfolio of Saurabh Upadhayay, Software Development Engineer at LambdaTest specializing in backend development and system optimization.",
+  title = "Saurabh Upadhayay | SDE-2 at Microsoft",
+  description = "Portfolio of Saurabh Upadhayay — SDE-2 at Microsoft. Backend & Distributed Systems Engineer building systems that scale.",
   image = "https://saurabhsahab.github.io/knowme/placeholder.svg",
   url = "https://saurabhsahab.github.io/knowme/"
 }: SEOProps) => {
