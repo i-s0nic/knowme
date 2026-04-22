@@ -11,8 +11,8 @@ interface SEOProps {
 const SEO = ({ 
   title = "Saurabh Upadhayay | SDE-2 at Microsoft",
   description = "Portfolio of Saurabh Upadhayay — SDE-2 at Microsoft. Backend & Distributed Systems Engineer building systems that scale.",
-  image = "https://saurabhsahab.github.io/knowme/placeholder.svg",
-  url = "https://saurabhsahab.github.io/knowme/"
+  image = "https://i-s0nic.github.io/knowme/SU.jpg",
+  url = "https://i-s0nic.github.io/knowme/"
 }: SEOProps) => {
   return (
     <Helmet>

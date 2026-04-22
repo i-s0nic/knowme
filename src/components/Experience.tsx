@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
-import { MapPin, Users, ExternalLink } from "lucide-react";
+import { MapPin, Users } from "lucide-react";
+
+const asset = (p: string) => `${import.meta.env.BASE_URL}${p.replace(/^\//, "")}`;
 
 type Experience = {
   company: string;
@@ -37,7 +39,7 @@ const experienceData: Experience[] = [
   },
   {
     company: "LambdaTest India Pvt. Ltd.",
-    logo: "/TestMu AI.jpeg",
+    logo: asset("lambdatest-logo.jpeg"),
     role: "Member of Technical Staff",
     period: "Aug 2024 – Apr 2026",
     location: "Noida, India",
@@ -54,7 +56,7 @@ const experienceData: Experience[] = [
   },
   {
     company: "Epifi Technologies India Pvt. Ltd. (Fi Money)",
-    logo: "/fi-money-vector-logo.svg",
+    logo: asset("fi-money-vector-logo.svg"),
     role: "Software Engineer",
     period: "July 2023 – Aug 2024",
     location: "Bangalore, India",
@@ -70,7 +72,7 @@ const experienceData: Experience[] = [
   },
   {
     company: "Epifi Technologies India Pvt. Ltd. (Fi Money)",
-    logo: "/fi-money-vector-logo.svg",
+    logo: asset("fi-money-vector-logo.svg"),
     role: "SDE Intern",
     period: "Nov 2022 – July 2023",
     location: "Bengaluru, India",
@@ -84,7 +86,7 @@ const experienceData: Experience[] = [
   },
   {
     company: "Masai",
-    logo: "/Masai.jpeg",
+    logo: asset("masai-logo.jpeg"),
     role: "DSA Mentor",
     period: "Oct 2022 – Aug 2023",
     location: "Bengaluru, India",
@@ -99,7 +101,7 @@ const experienceData: Experience[] = [
   },
   {
     company: "Fractal: The Coding Club, IET Lucknow",
-    logo: "/Fractal .jpeg",
+    logo: asset("fractal-logo.jpeg"),
     role: "Mentor",
     period: "Sep 2020 – Jun 2023",
     location: "Lucknow, India",
@@ -112,7 +114,7 @@ const experienceData: Experience[] = [
   },
   {
     company: "Ridecell",
-    logo: "/ridecell-seeklogo.svg",
+    logo: asset("ridecell-seeklogo.svg"),
     role: "Software Development Engineer Intern",
     period: "May 2022 – Aug 2022",
     location: "Pune division, Maharashtra, India",

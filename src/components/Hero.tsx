@@ -156,7 +156,7 @@ const Hero = () => {
 
               {/* REPLACE: profile photo here */}
               <div className="absolute inset-3 rounded-full overflow-hidden border-2 border-primary/40 bg-gradient-to-br from-secondary to-background flex items-center justify-center">
-                <img src="/SU.jpg" alt="Saurabh Upadhayay" className="w-full h-full object-cover" />
+                <img src={`${import.meta.env.BASE_URL}SU.jpg`} alt="Saurabh Upadhayay" className="w-full h-full object-cover" />
               </div>
 
               {/* Floating chip */}

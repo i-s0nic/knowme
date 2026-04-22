@@ -19,7 +19,7 @@ export default defineConfig(({ command, mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  base: "./",
+  base: mode === 'production' ? '/knowme/' : '/',
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
