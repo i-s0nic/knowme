@@ -26,18 +26,19 @@ class ErrorBoundary extends Component<Props, State> {
   public render() {
     if (this.state.hasError) {
       return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-100">
-          <div className="text-center p-8 max-w-md">
-            <h1 className="text-4xl font-bold text-red-600 mb-4">Oops!</h1>
-            <p className="text-lg text-gray-700 mb-6">Something went wrong.</p>
+        <main className="state-page site-container">
+          <div className="state-content" role="alert">
+            <span className="eyebrow">A brief interruption</span>
+            <h1>This page couldn't load.</h1>
+            <p>Something went wrong while opening the portfolio. Reload to try again.</p>
             <button
               onClick={() => window.location.reload()}
-              className="px-6 py-3 bg-indigo-600 text-white font-medium rounded-md hover:bg-indigo-700 transition-colors"
+              className="button button-primary"
             >
               Reload Page
             </button>
           </div>
-        </div>
+        </main>
       );
     }
 

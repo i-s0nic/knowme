@@ -1,47 +1,53 @@
-
-import { Helmet } from 'react-helmet-async';
+import { Helmet } from "react-helmet-async";
+import { profile } from "@/data/portfolio";
 
 interface SEOProps {
   title?: string;
   description?: string;
-  image?: string;
-  url?: string;
+  path?: string;
+  noindex?: boolean;
 }
 
-const SEO = ({ 
-  title = "Saurabh Upadhayay | SDE-2 at Microsoft",
-  description = "Portfolio of Saurabh Upadhayay — SDE-2 at Microsoft. Backend & Distributed Systems Engineer building systems that scale.",
-  image = "https://i-s0nic.github.io/knowme/SU.jpg",
-  url = "https://i-s0nic.github.io/knowme/"
+const Seo = ({
+  title = `${profile.name} | Software Engineer at Microsoft`,
+  description = "I'm Saurabh Upadhayay, a software engineer at Microsoft. I work on Windows onboarding, backend services, and distributed systems.",
+  path = "",
+  noindex = false,
 }: SEOProps) => {
+  const url = new URL(path.replace(/^\/+/, ""), profile.siteUrl).href;
+  const image = new URL("social-card.png", profile.siteUrl).href;
+
   return (
     <Helmet>
       <title>{title}</title>
       <meta name="description" content={description} />
-      <meta name="author" content="Saurabh Upadhayay" />
-      
-      {/* Open Graph */}
+      <meta name="author" content={profile.name} />
+      <meta name="robots" content={noindex ? "noindex, follow" : "index, follow"} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:type" content="website" />
+      <meta property="og:site_name" content={`${profile.name} | Portfolio`} />
       <meta property="og:image" content={image} />
-      <meta property="og:url" content={url} />
-      
-      {/* Twitter */}
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:image:alt" content="Saurabh Upadhayay, Software Engineer at Microsoft. Windows onboarding, backend platforms and distributed systems." />
+      {!noindex && <meta property="og:url" content={url} />}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={image} />
-      
-      {/* Additional SEO */}
-      <meta name="robots" content="index, follow" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <link rel="canonical" href={url} />
-      
-      {/* Professional briefcase favicon */}
-      <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💼</text></svg>" />
+      {!noindex && <link rel="canonical" href={url} />}
+      {!path && !noindex && <script type="application/ld+json">{JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Person",
+        name: profile.name,
+        url: profile.siteUrl,
+        jobTitle: profile.role,
+        worksFor: { "@type": "Organization", name: profile.company },
+        sameAs: [profile.linkedin, ...(profile.github ? [profile.github] : [])],
+      })}</script>}
     </Helmet>
   );
 };
 
-export default SEO;
+export default Seo;

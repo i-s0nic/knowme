@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="blue" x2="1" y2="1"><stop stop-color="#168deb"/><stop offset="1" stop-color="#65c7ff"/></linearGradient>
+    <radialGradient id="glow"><stop stop-color="#0078d4" stop-opacity=".25"/><stop offset="1" stop-color="#0078d4" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#0d1117"/>
+  <ellipse cx="1030" cy="270" rx="480" ry="420" fill="url(#glow)"/>
+  <path d="M64 106H1136M64 536H1136" stroke="#273344"/>
+  <text x="64" y="70" font-family="Arial,sans-serif" font-size="18" fill="#a4b2c4">ENGINEERING / SELECTED WORK</text>
+  <text x="1136" y="70" text-anchor="end" font-family="Arial,sans-serif" font-size="14" fill="#4baaff">SOFTWARE ENGINEER AT MICROSOFT</text>
+  <g transform="translate(935 245)" fill="url(#blue)">
+    <rect width="58" height="58" rx="6"/><rect x="68" width="58" height="58" rx="6"/>
+    <rect y="68" width="58" height="58" rx="6"/><rect x="68" y="68" width="58" height="58" rx="6"/>
+  </g>
+  <text x="66" y="183" font-family="Arial,sans-serif" font-size="22" fill="#a4b2c4">Hi, I'm</text>
+  <text x="61" y="280" font-family="Arial,sans-serif" font-size="92" font-weight="700" letter-spacing="-4" fill="#e6edf3">Saurabh</text>
+  <text x="61" y="381" font-family="Arial,sans-serif" font-size="92" font-weight="700" letter-spacing="-4" fill="url(#blue)">Upadhayay.</text>
+  <text x="66" y="450" font-family="Arial,sans-serif" font-size="19" fill="#a4b2c4">Windows onboarding. Backend platforms. Distributed systems.</text>
+  <text x="64" y="581" font-family="Arial,sans-serif" font-size="14" fill="#a4b2c4">WORK / EXPERIENCE / PROJECTS</text>
+  <text x="1136" y="581" text-anchor="end" font-family="Arial,sans-serif" font-size="14" fill="#4baaff">i-s0nic.github.io/knowme</text>
+</svg>

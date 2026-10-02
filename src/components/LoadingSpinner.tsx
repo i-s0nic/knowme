@@ -1,9 +1,8 @@
-const LoadingSpinner = () => {
-  return (
-    <div className="flex items-center justify-center min-h-[40vh] bg-background">
-      <div className="w-12 h-12 border-2 border-border border-t-primary rounded-full animate-spin" />
-    </div>
-  );
-};
+const LoadingSpinner = () => (
+  <div className="loading-state" role="status" aria-live="polite">
+    <span className="loading-ring" aria-hidden="true" />
+    <span>Opening the collection...</span>
+  </div>
+);
 
 export default LoadingSpinner;

@@ -2,4 +2,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://saurabhsahab.github.io/knowme/sitemap.xml
+Sitemap: https://i-s0nic.github.io/knowme/sitemap.xml

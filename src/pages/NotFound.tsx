@@ -1,37 +1,25 @@
-
-import { useLocation } from "react-router-dom";
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
+import RouteScroll from "@/components/RouteScroll";
 
-const NotFound = () => {
-  const location = useLocation();
-
-  useEffect(() => {
-    console.error(
-      "404 Error: User attempted to access non-existent route:",
-      location.pathname
-    );
-  }, [location.pathname]);
-
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center p-8 max-w-md">
-        <h1 className="text-6xl font-bold text-indigo-600 mb-6">404</h1>
-        <p className="text-xl text-gray-700 mb-8">Oops! The page you're looking for doesn't exist.</p>
-        <div className="bg-white p-6 rounded-lg shadow-md">
-          <p className="text-gray-600 mb-6">
-            The page at <span className="font-mono bg-gray-100 px-2 py-1 rounded">{location.pathname}</span> was not found.
-          </p>
-          <Link 
-            to="/" 
-            className="px-6 py-3 bg-indigo-600 text-white font-medium rounded-md hover:bg-indigo-700 transition-colors inline-block"
-          >
-            Return to Home
-          </Link>
-        </div>
+const NotFound = () => (
+  <>
+    <SEO title="Page not found | Saurabh Upadhayay" description="This page couldn't be found. Return to Saurabh's portfolio." noindex />
+    <Header />
+    <main id="main-content" className="state-page site-container" tabIndex={-1}>
+      <div className="state-content">
+        <span className="eyebrow">404</span>
+        <h1>This page doesn't exist.</h1>
+        <p>The address may be wrong, or the page may have moved. You can head back to my portfolio.</p>
+        <Link to="/" className="button button-primary"><ArrowLeft size={16} aria-hidden="true" />Return to the portfolio</Link>
       </div>
-    </div>
-  );
-};
+    </main>
+    <Footer />
+    <RouteScroll />
+  </>
+);
 
 export default NotFound;
